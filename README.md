@@ -44,7 +44,7 @@ A clean and minimal theme for Jellyfin with frosted glass surfaces, refined typo
 
 - **One-click installer**: `abyss-setup-vX.X.X.exe` (Windows) and `abyss-setup-vX.X.X.sh` (Linux) configure your entire Jellyfin instance, CSS, client and dashboard themes, home section order, and Spotlight, all automatically. The theme selectors are intentionally locked to Dark after installation.
 - **Jellyfin 12 support**: styles both the Modern React/MUI interface and the Desktop (Legacy) interface using stable component classes and Jellyfin theme variables.
-- **Spotlight home banner**: a cinematic banner on your home screen showing your current Continue Watching item, complete with backdrop image, metadata pills (rating, runtime, score), and a resume play button.
+- **Spotlight home banner**: a cinematic carousel on your home screen showing Continue Watching alongside movies and shows added in the past seven days, complete with backdrop images, metadata pills (rating, runtime, score), and play/resume buttons.
 - **Frosted glass UI**: header, drawer, dialogs, toasts, and footer all use `backdrop-filter` blur for a layered, depth-rich interface
 - **Refined typography**: *Google Sans* throughout, with consistent weight and spacing
 - **Smooth transitions and animations**: every interaction uses carefully tuned `cubic-bezier` easing. Home sections animate in with a staggered fade-up entrance on load. The favourite (heart) button has a spring pop animation.
