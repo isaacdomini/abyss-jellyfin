@@ -121,6 +121,24 @@ test('spotlight preserves cancellation while fetching weekly additions', async (
   await assert.rejects(fetchItems(controller.signal), { name: 'AbortError' });
 });
 
+test('large spotlight carousels keep navigation dots in a bounded moving window', () => {
+  const updateDots = script.slice(script.indexOf('function updateDots('), script.indexOf('async function selectItem('));
+  const dots = Array.from({ length: 100 }, () => ({ setAttribute() {} }));
+  const context = vm.createContext({
+    items: dots,
+    currentIndex: 50,
+    $: () => ({ querySelectorAll: () => dots })
+  });
+  new vm.Script(`${updateDots}\nupdateDots();`).runInContext(context);
+  assert.equal(dots.filter(dot => !dot.hidden).length, 5);
+  assert.equal(dots[50].className, 'dot dot-active');
+  context.currentIndex = 99;
+  new vm.Script('updateDots();').runInContext(context);
+  assert.equal(dots.filter(dot => !dot.hidden).length, 3);
+  assert.equal(dots[99].className, 'dot dot-active');
+  assert.match(script, /#carousel-dots \.dot:not\(\[hidden\]\)/);
+});
+
 test('spotlight inline script parses', () => {
   assert.ok(script, 'inline script should exist');
   assert.doesNotThrow(() => new vm.Script(script));

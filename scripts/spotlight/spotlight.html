@@ -102,7 +102,7 @@
 
 			function collectTvFocusables() {
 				tvFocusables = Array.prototype.slice.call(
-					document.querySelectorAll('#buttons .btn, #carousel-dots .dot')
+					document.querySelectorAll('#buttons .btn, #carousel-dots .dot:not([hidden])')
 				);
 			}
 
@@ -441,6 +441,7 @@
 				const dots = [...$('carousel-dots').querySelectorAll('.dot')];
 				dots.forEach((dot, index) => {
 					const distance = Math.abs(index - currentIndex);
+					dot.hidden = items.length > 7 && distance > 2;
 					dot.className = 'dot ' + (distance === 0 ? 'dot-active' : distance === 1 ? 'dot-near' : distance === 2 ? 'dot-far' : 'dot-hidden');
 					dot.setAttribute('aria-current', distance === 0 ? 'true' : 'false');
 				});
